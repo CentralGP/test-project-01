@@ -1,0 +1,17 @@
+name: 10_call-automatic-github-pulls-in-snaplogic
+
+on:
+  push:
+    branches:
+      - 2-PROD
+      - 1-QA
+      - 0-DEV
+
+jobs:
+  github-pulls-in-snaplogic:
+    uses: CentralGP/github-workflows/.github/workflows/10_reuse-snaplogic-pull.yaml@master
+    with:
+      branchname: ${{ github.ref_name }}
+      projectname: ${{ github.event.repository.name }}
+    secrets:
+      SNAPLOGIC_BEARER_TOKEN: ${{ secrets.SNAPLOGIC_BEARER_TOKEN }}

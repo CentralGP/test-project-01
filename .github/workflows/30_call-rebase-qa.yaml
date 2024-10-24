@@ -1,0 +1,16 @@
+name: 30_call-automatic-github-rebase-qa
+
+on:
+  push:
+    branches:
+      - 2-PROD
+
+jobs:
+  github-rebase-qa:
+    uses: CentralGP/github-workflows/.github/workflows/30_reuse-rebase-qa.yaml@master
+    with:
+      PARENT_BRANCH: '2-PROD'
+      CHILD_BRANCH: '1-QA'
+      ACTOR: 'automatic-rebase'
+    secrets:
+      SNAPLOGIC_REPO_CREATION_PAT: ${{ secrets.SNAPLOGIC_REPO_CREATION_PAT }}

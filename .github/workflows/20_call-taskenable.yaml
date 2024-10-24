@@ -1,0 +1,19 @@
+name: 20_call-automatic-snaplogic-task-enable
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events
+  workflow_run:
+    workflows:
+      - 10_call-snaplogic-pull.yaml 
+    types:
+      - completed
+
+jobs:
+  snaplogic-task-enable:
+    uses: CentralGP/github-workflows/.github/workflows/20_reuse-taskenable.yaml@master
+    with:
+      branchname: ${{ github.ref_name }}
+      projectname: ${{ github.event.repository.name }}
+    secrets:
+      SNAPLOGIC_API_KEY: ${{ secrets.SNAPLOGIC_API_KEY }}
